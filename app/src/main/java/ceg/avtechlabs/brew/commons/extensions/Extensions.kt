@@ -2,7 +2,9 @@ package ceg.avtechlabs.brew.commons.extensions
 
 import android.graphics.Typeface
 import android.text.TextUtils
+import android.view.View
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import ceg.avtechlabs.brew.R
 import com.squareup.picasso.Picasso
@@ -18,7 +20,18 @@ fun ImageView.loadImage(url: String){
         Picasso.with(context).load(url).placeholder(R.drawable.progress_animation).into(this)
 }
 
-fun TextView.setQuiveraFont(){
+fun TextView.setQuiveraFont() {
     val typeface = Typeface.createFromAsset(context.getAssets(), "quivira.otf")
     this.typeface = typeface
 }
+
+fun ProgressBar.update(visible : Boolean = true) = if(visible) this.visibility = View.VISIBLE else this.visibility = View.INVISIBLE;
+
+fun ImageView.save() {
+
+}
+
+fun ImageView.setWallpaper() {
+
+}
+

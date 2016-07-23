@@ -1,5 +1,6 @@
 package ceg.avtechlabs.brew
 
+import android.Manifest
 import android.app.ProgressDialog
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
@@ -10,12 +11,16 @@ import android.util.Log
 import android.view.View
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ProgressBar
 import ceg.avtechlabs.brew.api.RestApi
 import ceg.avtechlabs.brew.commons.extensions.loadImage
 import ceg.avtechlabs.brew.commons.extensions.setQuiveraFont
+import ceg.avtechlabs.brew.commons.extensions.update
 import ceg.avtechlabs.brew.commons.features.BrewDataManager
+import ceg.avtechlabs.brew.model.Data
 import com.ashokvarma.bottomnavigation.BottomNavigationBar
 import com.ashokvarma.bottomnavigation.BottomNavigationItem
+import com.avtechlabs.peacock.checkAndAskPermission
 import com.avtechlabs.peacock.isInternetConnected
 import com.avtechlabs.peacock.showLongToast
 import kotlinx.android.synthetic.main.*
@@ -28,48 +33,16 @@ import rx.subscriptions.CompositeSubscription
 
 class MainActivity : AppCompatActivity() {
 
+    protected var subscriptions = CompositeSubscription()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        /*if(isInternetConnected()){
-            imageView.loadImage("http://www.bing.com/az/hprichbg/rb/BadlandsHeadlights_EN-US10459083918_1920x1080.jpg")
-        }else{
-            showLongToast("Connect to Internet!")
-        }*/
-        val progress = ProgressDialog(this)
-        progress.setCancelable(false)
-        progress.setMessage("Please wait")
-        progress.show()
-
-
-        val subscriptions = CompositeSubscription()
-        val subscription = BrewDataManager().pour()
-            .subscribeOn(Schedulers.io())
-            .subscribe(
-                    {
-                       brew ->
-                        progress.dismiss()
-                        runOnUiThread {
-                            textview_title.setQuiveraFont()
-                            textview_info.setQuiveraFont()
-                            textview_title.setText(brew.data.title)
-                            textview_info.setText(brew.data.info)
-                            imageView.loadImage(brew.data.url)
-                        }
-
-                    },
-                    {
-                        e ->
-                        progress.dismiss()
-                        showLongToast("error")
-                    }
-
-            )
-        subscriptions.add(subscription)
+        subscribe()
         addBottomBar()
-
+        checkAndAskPermission(permissionsList)
     }
 
     fun addBottomBar(){
@@ -82,10 +55,49 @@ class MainActivity : AppCompatActivity() {
                 .initialise()
     }
 
-    fun checkForCrashes(){
+
+    fun checkForCrashes() {
         CrashManager.register(this)
     }
 
+    override fun onResume() {
+        super.onResume()
+        subscriptions = CompositeSubscription()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if(!subscriptions.isUnsubscribed) {
+            subscriptions.unsubscribe()
+        }
+        subscriptions.clear()
+    }
+
+    fun subscribe() {
+        val subscription = BrewDataManager().pour()
+                .subscribeOn(Schedulers.io())
+                .subscribe(
+                            { brew -> updateView(brew.data) },
+                            { e -> }
+                )
+        subscriptions.add(subscription)
+    }
+
+    fun updateView(data: Data){
+        runOnUiThread {
+
+        }
+    }
+
+    private val progressBar by lazy {
+        ProgressBar(this)
+    }
+
+    private val permissionsList by lazy {
+        listOf(
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+        ).toTypedArray()
+    }
 
 }
 
