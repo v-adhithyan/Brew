@@ -21,6 +21,7 @@ import com.avtechlabs.peacock.showLongToast
 import kotlinx.android.synthetic.main.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
+import net.hockeyapp.android.CrashManager
 import rx.schedulers.Schedulers
 import rx.subscriptions.CompositeSubscription
 
@@ -80,5 +81,11 @@ class MainActivity : AppCompatActivity() {
                 .addItem(BottomNavigationItem(R.drawable.ic_feedback_black_24dp, "Feedback"))
                 .initialise()
     }
+
+    fun checkForCrashes(){
+        CrashManager.register(this)
+    }
+
+
 }
 
