@@ -19,6 +19,8 @@ class BrewDataManager(private val api: RestApi = RestApi()) {
             if(response.isSuccessful) {
                 subscriber.onNext(response.body())
                 subscriber.onCompleted()
+            }else{
+                Log.d("brewerror", response.message())
             }
 
             subscriber.onError(Throwable(response.message()))

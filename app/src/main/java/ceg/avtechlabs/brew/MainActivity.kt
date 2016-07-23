@@ -11,12 +11,13 @@ import android.util.Log
 import android.view.View
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ImageView
 import android.widget.ProgressBar
 import ceg.avtechlabs.brew.api.RestApi
 import ceg.avtechlabs.brew.commons.extensions.loadImage
 import ceg.avtechlabs.brew.commons.extensions.setQuiveraFont
-import ceg.avtechlabs.brew.commons.extensions.update
 import ceg.avtechlabs.brew.commons.features.BrewDataManager
+import ceg.avtechlabs.brew.commons.listeners.NavBarTabListener
 import ceg.avtechlabs.brew.model.Data
 import com.ashokvarma.bottomnavigation.BottomNavigationBar
 import com.ashokvarma.bottomnavigation.BottomNavigationItem
@@ -35,11 +36,13 @@ class MainActivity : AppCompatActivity() {
 
     protected var subscriptions = CompositeSubscription()
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
+        showProgressBar()
         subscribe()
         addBottomBar()
         checkAndAskPermission(permissionsList)
@@ -53,6 +56,7 @@ class MainActivity : AppCompatActivity() {
                 .addItem(BottomNavigationItem(R.drawable.ic_autorenew_black_24dp, "Refresh"))
                 .addItem(BottomNavigationItem(R.drawable.ic_feedback_black_24dp, "Feedback"))
                 .initialise()
+        bottom_navigation_bar.setTabSelectedListener(NavBarTabListener(this, imageView))
     }
 
 
@@ -85,13 +89,24 @@ class MainActivity : AppCompatActivity() {
 
     fun updateView(data: Data){
         runOnUiThread {
+            textview_title.setQuiveraFont()
+            textview_info.setQuiveraFont()
 
+            progress?.dismiss()
+
+            textview_title.setText(data.title)
+            textview_info.setText(data.info)
+            imageView.scaleType = ImageView.ScaleType.CENTER
+            imageView.loadImage(data.url)
         }
     }
 
-    private val progressBar by lazy {
-        ProgressBar(this)
+    fun showProgressBar() {
+        progress?.setTitle("Brewing ...")
+        progress?.setCancelable(false)
+        progress?.show()
     }
+
 
     private val permissionsList by lazy {
         listOf(
@@ -99,5 +114,6 @@ class MainActivity : AppCompatActivity() {
         ).toTypedArray()
     }
 
+    private val progress by lazy { ProgressDialog(this) }
 }
 

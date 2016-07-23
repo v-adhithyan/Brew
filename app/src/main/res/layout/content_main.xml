@@ -24,7 +24,7 @@
             android:layout_height="250dp"
             android:id="@+id/imageView"
             android:layout_alignParentTop="true"
-            android:scaleType="center"
+            android:layout_centerHorizontal="true"
             />
 
         <TextView
@@ -45,6 +45,14 @@
             android:id="@+id/textview_info"
             android:layout_below="@+id/textview_title"
             android:textAlignment="gravity"/>
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/progressBar"
+            android:layout_centerInParent="true"
+            android:visibility="invisible"/>
+
 
         <!--com.google.android.gms.ads.AdView
             android:id="@+id/adView"
