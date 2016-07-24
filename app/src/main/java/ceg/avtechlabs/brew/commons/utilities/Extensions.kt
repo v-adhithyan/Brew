@@ -1,4 +1,4 @@
-package ceg.avtechlabs.brew.commons.extensions
+package ceg.avtechlabs.brew.commons.utilities
 
 import android.app.Activity
 import android.app.WallpaperManager
@@ -28,18 +28,9 @@ fun ImageView.loadImage(url: String){
         Picasso.with(context).load(url).placeholder(R.drawable.progress_animation).into(this)
 }
 
-fun TextView.setQuiveraFont() {
-    val typeface = Typeface.createFromAsset(context.getAssets(), "quivira.otf")
-    this.typeface = typeface
-}
 
 fun Activity.onMainThread(func: () -> Unit) {
     runOnUiThread { func() }
-}
-
-
-fun ImageView.save() {
-
 }
 
 
