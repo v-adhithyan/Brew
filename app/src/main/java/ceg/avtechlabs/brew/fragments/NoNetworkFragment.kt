@@ -37,7 +37,7 @@ class NoNetworkFragment: Fragment() {
     }
 
     private fun addBottomBar() {
-        var bottomBar = Common.instance.bottomBar
+        var bottomBar = Common.bottomBar
         bottomBar?.clearAll()
         bottomBar
                 ?.addItem(BottomNavigationItem(R.drawable.ic_autorenew_black_24dp, "Refresh"))

@@ -40,12 +40,11 @@ class MainFragment: Fragment() {
 
         showProgressBar()
         subscribe()
-        showAd()
-        //addBottomBar()
+        addBottomBar()
     }
 
     private fun addBottomBar() {
-        var bottomBar = Common.instance.bottomBar
+        var bottomBar = Common.bottomBar
         bottomBar?.clearAll()
         bottomBar
                 ?.addItem(BottomNavigationItem(R.drawable.ic_save_black_24dp, "Save"))
@@ -76,7 +75,7 @@ class MainFragment: Fragment() {
             textview_title.setText(data.title)
             textview_info.setText(data.info)
             imageView.loadImage(data.url)
-            addBottomBar()
+            showAd()
         //}
     }
 

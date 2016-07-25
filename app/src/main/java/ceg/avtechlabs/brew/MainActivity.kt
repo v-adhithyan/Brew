@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        Common.instance.bottomBar = bottom_navigation_bar
+        Common.bottomBar = bottom_navigation_bar
         changeFragment(this, supportFragmentManager)
         checkAndAskPermission(permissionsList)
     }
@@ -64,7 +64,3 @@ class MainActivity : AppCompatActivity() {
     }
 
 }
-
-
-
-
