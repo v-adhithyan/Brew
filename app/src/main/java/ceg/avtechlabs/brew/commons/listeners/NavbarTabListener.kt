@@ -3,7 +3,9 @@ package ceg.avtechlabs.brew.commons.listeners
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
+import android.support.v4.app.FragmentManager
 import android.widget.ImageView
+import ceg.avtechlabs.brew.commons.utilities.changeFragment
 import ceg.avtechlabs.brew.commons.utilities.save
 import ceg.avtechlabs.brew.commons.utilities.setWallpaper
 import com.ashokvarma.bottomnavigation.BottomNavigationBar
@@ -16,17 +18,25 @@ import java.util.*
  */
 
 
-class NavBarTabListener(val activity: Activity, val image: ImageView ): BottomNavigationBar.OnTabSelectedListener {
+class NavBarTabListener(val activity: Activity, val image: ImageView?, val noNetwork: Boolean = false, val fragmentManager: FragmentManager): BottomNavigationBar.OnTabSelectedListener {
     override fun onTabUnselected(position: Int) {
 
     }
 
     override fun onTabSelected(position: Int) {
-        doAction(position)
+        selectAction(position)
     }
 
     override fun onTabReselected(position: Int) {
-        doAction(position)
+        selectAction(position)
+    }
+
+    private fun selectAction(position: Int) {
+        if(noNetwork) {
+            refresh()
+        }else {
+            doAction(position)
+        }
     }
 
     private fun doAction(position: Int) {
@@ -40,8 +50,9 @@ class NavBarTabListener(val activity: Activity, val image: ImageView ): BottomNa
     }
 
     private fun saveImage() {
+        val saved = image?.save(Date().toString()) ?: false
         when {
-            image?.save(Date().toString()) -> activity.showLongToast("Image saved to gallery.")
+            saved -> activity.showLongToast("Image saved to gallery.")
             else -> activity.showLongToast("Image saving failed")
         }
     }
@@ -53,6 +64,7 @@ class NavBarTabListener(val activity: Activity, val image: ImageView ): BottomNa
     }
 
     private fun refresh() {
-
+        changeFragment(activity, fragmentManager)
     }
+
 }

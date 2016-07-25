@@ -44,6 +44,7 @@ dependencies {
     compile 'net.hockeyapp.android:HockeySDK:4.0.1'
     compile 'com.github.jorgecastilloprz:fabprogresscircle:1.01@aar'
     compile 'com.github.ybq:Android-SpinKit:1.0.4'
+    compile 'com.skyfishjy.ripplebackground:library:1.0.1'
 }
 repositories {
     mavenCentral()

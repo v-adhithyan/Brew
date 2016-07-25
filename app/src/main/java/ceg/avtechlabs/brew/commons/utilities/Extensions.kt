@@ -6,12 +6,18 @@ import android.graphics.Point
 import android.graphics.Typeface
 import android.graphics.drawable.BitmapDrawable
 import android.support.design.widget.Snackbar
+import android.support.v4.app.FragmentManager
 import android.text.TextUtils
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import ceg.avtechlabs.brew.R
+import ceg.avtechlabs.brew.fragments.MainFragment
+import ceg.avtechlabs.brew.fragments.NoNetworkFragment
+import com.avtechlabs.peacock.isInternetConnected
 import com.avtechlabs.peacock.showLongToast
 import com.github.ybq.android.spinkit.style.DoubleBounce
 import com.squareup.picasso.Picasso
@@ -44,3 +50,19 @@ fun ImageView.setWallpaper(activity: Activity) {
     Thread(wallpaperSetter).start()
 }
 
+fun ViewGroup.inflate(layoutId: Int, attachToRoot: Boolean = false): View {
+    return LayoutInflater.from(context).inflate(layoutId, this, attachToRoot)
+}
+
+fun changeFragment(activity: Activity, supportFragmentManager: FragmentManager) {
+    var ft = supportFragmentManager.beginTransaction()
+    ft.setCustomAnimations(R.anim.abc_fade_in, R.anim.abc_fade_out, R.anim.abc_popup_enter, R.anim.abc_popup_exit)
+
+    if(activity.isInternetConnected()) {
+        ft.replace(R.id.fragment_container, MainFragment())
+    } else {
+        ft.replace(R.id.fragment_container, NoNetworkFragment())
+    }
+
+    ft.commit()
+}
