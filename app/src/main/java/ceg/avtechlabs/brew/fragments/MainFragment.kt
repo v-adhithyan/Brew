@@ -5,6 +5,7 @@ import android.app.ProgressDialog
 import android.graphics.Typeface
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,8 +17,11 @@ import ceg.avtechlabs.brew.commons.utilities.Common
 import ceg.avtechlabs.brew.commons.utilities.inflate
 import ceg.avtechlabs.brew.commons.utilities.loadImage
 import ceg.avtechlabs.brew.model.Data
+import com.ashokvarma.bottomnavigation.BottomNavigationBar
 import com.ashokvarma.bottomnavigation.BottomNavigationItem
+import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.InterstitialAd
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_brew.*
 import rx.schedulers.Schedulers
@@ -38,6 +42,7 @@ class MainFragment: Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        showAd()
         showProgressBar()
         subscribe()
         addBottomBar()
@@ -46,6 +51,7 @@ class MainFragment: Fragment() {
     private fun addBottomBar() {
         var bottomBar = Common.bottomBar
         bottomBar?.clearAll()
+        bottomBar?.setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_DEFAULT)
         bottomBar
                 ?.addItem(BottomNavigationItem(R.drawable.ic_save_black_24dp, "Save"))
                 ?.addItem(BottomNavigationItem(R.drawable.ic_wallpaper_black_24dp, "Set as wallpaper"))
@@ -60,27 +66,26 @@ class MainFragment: Fragment() {
                 .subscribeOn(Schedulers.io())
                 .subscribe(
                         { brew -> updateView(brew.data) },
-                        { e -> }
+                        { e -> Log.d("brewdata", e.message)}
                 )
         subscriptions.add(subscription)
     }
 
     private fun updateView(data: Data){
-        //runOnUiThread {
+        activity.runOnUiThread {
             setQuiveraFont(textview_title, bold = true)
             setQuiveraFont(textview_info)
 
             progress?.dismiss()
 
-            textview_title.setText(data.title)
-            textview_info.setText(data.info)
+            textview_title.text = (data.title)
+            textview_info.text = (data.info)
             imageView.loadImage(data.url)
-            showAd()
-        //}
+        }
     }
 
     private fun showProgressBar() {
-        progress?.setTitle("Brewing ...")
+        progress?.setMessage("Brewing ...")
         progress?.setCancelable(false)
         progress?.show()
     }
@@ -100,7 +105,7 @@ class MainFragment: Fragment() {
 
     private fun showAd() {
         val adRequest = AdRequest.Builder().build()
-        adView?.loadAd(adRequest)
+        adView.loadAd(adRequest)
     }
 
     private fun setQuiveraFont(text: TextView, bold: Boolean = false) {

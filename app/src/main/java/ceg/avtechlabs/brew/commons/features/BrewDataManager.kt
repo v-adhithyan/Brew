@@ -17,6 +17,7 @@ class BrewDataManager(private val api: RestApi = RestApi()) {
             val response = callResponse.execute()
 
             if(response.isSuccessful) {
+                Log.d("brewdata", response.body().data.url)
                 subscriber.onNext(response.body())
                 subscriber.onCompleted()
             }else{

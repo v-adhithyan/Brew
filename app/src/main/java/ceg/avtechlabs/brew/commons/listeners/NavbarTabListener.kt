@@ -44,8 +44,7 @@ class NavBarTabListener(val activity: Activity, val image: ImageView?, val noNet
             position == 0 -> saveImage()
             position == 1 -> image?.setWallpaper(activity)
             position == 2 -> rate()
-            position == 3 -> refresh()
-            position == 4 -> FeedbackManager.showFeedbackActivity(activity)
+            position == 3 -> FeedbackManager.showFeedbackActivity(activity)
         }
     }
 

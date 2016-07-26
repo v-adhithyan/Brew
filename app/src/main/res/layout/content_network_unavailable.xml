@@ -1,4 +1,4 @@
-<com.skyfishjy.library.RippleBackground
+<!--com.skyfishjy.library.RippleBackground
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -17,4 +17,46 @@
         android:id="@+id/rippleImage"
         android:src="@drawable/ic_import_export_black_36dp"/>
 
-</com.skyfishjy.library.RippleBackground>
+</com.skyfishjy.library.RippleBackground-->
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    tools:context="ceg.avtechlabs.brew.fragments.NoNetworkFragment">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Go to Settings"
+        android:id="@+id/button_md"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:paddingLeft="10dp"
+
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Please turn on Mobile data or Connect to Wifi."
+        android:id="@+id/textview_no_internet"
+        android:layout_above="@+id/button_md"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Connect to Wifi"
+        android:id="@+id/button_wifi"
+        android:layout_alignTop="@+id/button_md"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:paddingRight="10dp"
+        />
+
+</RelativeLayout>
