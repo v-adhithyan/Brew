@@ -18,8 +18,6 @@ import android.widget.TextView
 import ceg.avtechlabs.brew.api.RestApi
 import ceg.avtechlabs.brew.commons.utilities.loadImage
 import ceg.avtechlabs.brew.commons.features.BrewDataManager
-import ceg.avtechlabs.brew.commons.listeners.NavBarTabListener
-import ceg.avtechlabs.brew.commons.utilities.Common
 import ceg.avtechlabs.brew.commons.utilities.changeFragment
 import ceg.avtechlabs.brew.fragments.MainFragment
 import ceg.avtechlabs.brew.fragments.NoNetworkFragment
@@ -47,7 +45,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        Common.bottomBar = bottom_navigation_bar
         changeFragment(this, supportFragmentManager)
         checkAndAskPermission(permissionsList)
     }

@@ -11,8 +11,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import ceg.avtechlabs.brew.R
-import ceg.avtechlabs.brew.commons.listeners.NavBarTabListener
-import ceg.avtechlabs.brew.commons.utilities.Common
 import ceg.avtechlabs.brew.commons.utilities.inflate
 import com.ashokvarma.bottomnavigation.BottomNavigationItem
 import kotlinx.android.synthetic.main.activity_main.*
@@ -31,21 +29,11 @@ class NoNetworkFragment: Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        addBottomBar()
         setListeners()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-    }
-
-    private fun addBottomBar() {
-        var bottomBar = Common.bottomBar
-        bottomBar?.clearAll()
-        bottomBar
-                ?.addItem(BottomNavigationItem(R.drawable.ic_autorenew_black_24dp, "Refresh"))
-                ?.initialise()
-        bottomBar?.setTabSelectedListener(NavBarTabListener(context as Activity, imageView, noNetwork = true, fragmentManager = fragmentManager))
     }
 
     private fun setListeners() {
