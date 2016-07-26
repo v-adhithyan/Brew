@@ -22,12 +22,9 @@ import ceg.avtechlabs.brew.commons.utilities.changeFragment
 import ceg.avtechlabs.brew.fragments.MainFragment
 import ceg.avtechlabs.brew.fragments.NoNetworkFragment
 import ceg.avtechlabs.brew.model.Data
-import com.ashokvarma.bottomnavigation.BottomNavigationBar
-import com.ashokvarma.bottomnavigation.BottomNavigationItem
 import com.avtechlabs.peacock.checkAndAskPermission
 import com.avtechlabs.peacock.isInternetConnected
 import com.avtechlabs.peacock.showLongToast
-import com.github.ybq.android.spinkit.style.DoubleBounce
 import com.google.android.gms.ads.AdRequest
 import kotlinx.android.synthetic.main.*
 import kotlinx.android.synthetic.main.activity_main.*

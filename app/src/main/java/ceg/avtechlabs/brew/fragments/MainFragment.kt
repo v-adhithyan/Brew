@@ -4,6 +4,8 @@ import android.app.Activity
 import android.app.ProgressDialog
 import android.graphics.Typeface
 import android.os.Bundle
+import android.support.annotation.DimenRes
+import android.support.annotation.IntegerRes
 import android.support.v4.app.Fragment
 import android.util.Log
 import android.util.TypedValue
@@ -15,9 +17,11 @@ import ceg.avtechlabs.brew.R
 import ceg.avtechlabs.brew.commons.features.BrewDataManager
 import ceg.avtechlabs.brew.commons.utilities.inflate
 import ceg.avtechlabs.brew.commons.utilities.loadImage
+import ceg.avtechlabs.brew.commons.utilities.save
+import ceg.avtechlabs.brew.commons.utilities.setWallpaper
 import ceg.avtechlabs.brew.model.Data
-import com.ashokvarma.bottomnavigation.BottomNavigationBar
-import com.ashokvarma.bottomnavigation.BottomNavigationItem
+import com.avtechlabs.peacock.showLongToast
+import com.dd.morphingbutton.MorphingButton
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
@@ -25,6 +29,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_brew.*
 import rx.schedulers.Schedulers
 import rx.subscriptions.CompositeSubscription
+import java.util.*
 
 /**
  * Created by adhithyan-3592 on 25/07/16.
@@ -41,10 +46,10 @@ class MainFragment: Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        hideButtons()
         showAd()
         showProgressBar()
         subscribe()
-
     }
 
     private fun subscribe() {
@@ -60,7 +65,8 @@ class MainFragment: Fragment() {
     private fun updateView(data: Data){
         activity.runOnUiThread {
             transformTextView()
-
+            showButtons()
+            setListeners()
             progress?.dismiss()
 
             textview_title.text = (data.title)
@@ -110,6 +116,57 @@ class MainFragment: Fragment() {
         text.typeface = quivera
     }
 
+    private fun setListeners(){
+        button_save.setOnClickListener({
+            val saved = imageView?.save(Date().toString()) ?: false
+            when {
+                saved -> {
+                    button_save.morph(circle)
+                    activity.showLongToast("Image saved to gallery.")
+                }
+                else -> activity.showLongToast("Unable to save image. Please try again after sometime.")
+            }
+        })
+
+        button_set.setOnClickListener({
+            imageView?.setWallpaper(activity)
+            button_set.morph(circle)
+            activity.showLongToast("Image successfully set as wallpaper!")
+        })
+    }
+
     private val progress by lazy { ProgressDialog(context) }
 
+    private fun hideButtons() {
+        button_save.visibility = View.INVISIBLE
+        button_set.visibility = View.INVISIBLE
+    }
+
+    private fun showButtons() {
+        button_save.visibility = View.VISIBLE
+        button_set.visibility = View.VISIBLE
+    }
+
+    private val circle by lazy {
+        MorphingButton.Params.create()
+        .duration(500)
+        .cornerRadius(dimen(R.dimen.btn_dimen))
+        .width(dimen(R.dimen.btn_dimen))
+        .height(dimen(R.dimen.btn_dimen))
+        .color(color(R.color.colorPrimary))
+        .colorPressed(R.color.colorPrimaryDark)
+        .icon(R.drawable.ic_done_white_24dp)
+    }
+
+    private fun integer(@IntegerRes resId: Int): Int {
+        return resources.getInteger(resId)
+    }
+
+    private fun color(@IntegerRes resId: Int): Int {
+        return resources.getColor(resId)
+    }
+
+    private fun dimen(@DimenRes resId: Int): Int{
+        return resources.getDimension(resId).toInt()
+    }
 }

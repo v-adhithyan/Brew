@@ -19,7 +19,6 @@ import ceg.avtechlabs.brew.fragments.MainFragment
 import ceg.avtechlabs.brew.fragments.NoNetworkFragment
 import com.avtechlabs.peacock.isInternetConnected
 import com.avtechlabs.peacock.showLongToast
-import com.github.ybq.android.spinkit.style.DoubleBounce
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.content_main.view.*
 

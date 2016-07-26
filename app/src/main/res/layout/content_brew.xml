@@ -12,63 +12,74 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!--android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/card_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"-->
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+
                 <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="300dp"
+                    android:id="@+id/imageView"
                     android:layout_alignParentTop="true"
-                    android:scaleType="centerCrop"
-                    />
+                     />
 
                 <TextView
-                    android:id="@+id/textview_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/imageView"
                     android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text=""
                     android:maxLines="3"
-                    android:padding="8dp"
-                    android:text="TITLE ..."
-                    android:textColor="@color/black"
-                    android:textSize="22dp"
-                    />
+                    android:id="@+id/textview_title"
+                    android:layout_below="@+id/imageView"
+                    android:layout_centerHorizontal="true" />
 
                 <TextView
-                    android:id="@+id/textview_info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text=""
+                    android:id="@+id/textview_info"
                     android:layout_below="@+id/textview_title"
-                    android:padding="8dp"
-                    android:textColor="@color/black"
-                    android:text="info ..."
-                    android:textSize="16dp"
-                    android:textAlignment="gravity"/>
+                    android:layout_centerHorizontal="true" />
+
+                <com.dd.morphingbutton.MorphingButton
+                    android:id="@+id/button_save"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="Save Image"
+                    android:layout_below="@+id/textview_info"
+                    android:layout_centerHorizontal="true"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    />
+
+                <com.dd.morphingbutton.MorphingButton
+                    android:id="@+id/button_set"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:textColor="@color/white"
+                    android:text="Set as wallpaper"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="20dp"
+                    android:layout_below="@+id/button_save"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="22dp" />
 
                 <com.google.android.gms.ads.AdView
                     android:id="@+id/adView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_below="@+id/textview_info"
                     ads:adSize="BANNER"
-                    ads:adUnitId="@string/admob_ad_unit_id">
-                </com.google.android.gms.ads.AdView>
+                    ads:adUnitId="@string/admob_ad_unit_id"
+                    android:layout_below="@+id/button_set"
+                    android:paddingTop="10dp"/>
 
             </RelativeLayout>
-        <!--/android.support.v7.widget.CardView-->
+
     </FrameLayout>
+
 </ScrollView>

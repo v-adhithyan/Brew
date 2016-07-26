@@ -7,12 +7,10 @@ import android.provider.Settings
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import ceg.avtechlabs.brew.R
+import ceg.avtechlabs.brew.commons.utilities.changeFragment
 import ceg.avtechlabs.brew.commons.utilities.inflate
-import com.ashokvarma.bottomnavigation.BottomNavigationItem
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_brew.*
 import kotlinx.android.synthetic.main.content_network_unavailable.*
@@ -23,6 +21,7 @@ import kotlinx.android.synthetic.main.content_network_unavailable.*
 
 class NoNetworkFragment: Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        setHasOptionsMenu(true)
         return container?.inflate(R.layout.content_network_unavailable)
     }
 
@@ -30,6 +29,19 @@ class NoNetworkFragment: Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         setListeners()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_refresh, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId
+        when {
+            id == R.id.action_refresh -> { changeFragment(activity, fragmentManager) }
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onDestroy() {
