@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.SET_WALLPAPER"/>
     <uses-permission android:name="android.permission.SET_WALLPAPER_HINTS"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
 
     <application
         android:allowBackup="true"
@@ -17,6 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <meta-data android:name="net.hockeyapp.android.appIdentifier" android:value="${HOCKEYAPP_APP_ID}" />
+
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -28,6 +30,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <receiver
+            android:name=".commons.utilities.NotificationService"
+            android:enabled="true"
+            android:exported="true">
+        </receiver>
+
     </application>
 
 </manifest>

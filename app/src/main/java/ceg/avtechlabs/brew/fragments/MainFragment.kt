@@ -1,6 +1,5 @@
 package ceg.avtechlabs.brew.fragments
 
-import android.app.Activity
 import android.app.ProgressDialog
 import android.graphics.Typeface
 import android.os.Bundle
@@ -8,25 +7,17 @@ import android.support.annotation.DimenRes
 import android.support.annotation.IntegerRes
 import android.support.v4.app.Fragment
 import android.util.Log
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import ceg.avtechlabs.brew.R
 import ceg.avtechlabs.brew.commons.features.BrewDataManager
-import ceg.avtechlabs.brew.commons.utilities.inflate
-import ceg.avtechlabs.brew.commons.utilities.loadImage
-import ceg.avtechlabs.brew.commons.utilities.save
-import ceg.avtechlabs.brew.commons.utilities.setWallpaper
+import ceg.avtechlabs.brew.commons.utilities.*
 import ceg.avtechlabs.brew.model.Data
 import com.avtechlabs.peacock.showLongToast
 import com.dd.morphingbutton.MorphingButton
-import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.InterstitialAd
-import com.mikepenz.materialdrawer.DrawerBuilder
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_brew.*
 import rx.schedulers.Schedulers
 import rx.subscriptions.CompositeSubscription
@@ -74,6 +65,7 @@ class MainFragment: Fragment() {
             textview_title.text = (response.get(0))
             textview_info.text = (response.get(1))
             imageView.loadImage(data.url)
+            startService(context, 10)
         }
     }
 
