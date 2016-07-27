@@ -25,6 +25,7 @@ import com.dd.morphingbutton.MorphingButton
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
+import com.mikepenz.materialdrawer.DrawerBuilder
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_brew.*
 import rx.schedulers.Schedulers
@@ -64,13 +65,14 @@ class MainFragment: Fragment() {
 
     private fun updateView(data: Data){
         activity.runOnUiThread {
+            var response = transformData(data.info)
             transformTextView()
             showButtons()
             setListeners()
             progress?.dismiss()
 
-            textview_title.text = (data.title)
-            textview_info.text = (data.info)
+            textview_title.text = (response.get(0))
+            textview_info.text = (response.get(1))
             imageView.loadImage(data.url)
         }
     }
@@ -100,19 +102,12 @@ class MainFragment: Fragment() {
     }
 
     private fun transformTextView() {
-        val metrics = getResources().displayMetrics
-        val dp = TypedValue.COMPLEX_UNIT_PX
-
-        setQuiveraFont(textview_title, bold = true)
+        setQuiveraFont(textview_title)
         setQuiveraFont(textview_info)
-
-        textview_title.textSize = TypedValue.applyDimension(dp, 30f, metrics)
-        textview_info.textSize = TypedValue.applyDimension(dp, 20f, metrics)
     }
 
-    private fun setQuiveraFont(text: TextView, bold: Boolean = false) {
+    private fun setQuiveraFont(text: TextView) {
         var quivera = Typeface.createFromAsset(context.getAssets(), "quivira.otf")
-        when { bold -> quivera = Typeface.create(quivera, Typeface.BOLD) }
         text.typeface = quivera
     }
 
@@ -131,7 +126,6 @@ class MainFragment: Fragment() {
         button_set.setOnClickListener({
             imageView?.setWallpaper(activity)
             button_set.morph(circle)
-            activity.showLongToast("Image successfully set as wallpaper!")
         })
     }
 
@@ -168,5 +162,13 @@ class MainFragment: Fragment() {
 
     private fun dimen(@DimenRes resId: Int): Int{
         return resources.getDimension(resId).toInt()
+    }
+
+    private fun transformData(info: String): List<String> {
+        val content = info.split("\n")
+        val title = content.get(0)
+        val info = content.get(1)
+
+        return listOf(title, info)
     }
 }

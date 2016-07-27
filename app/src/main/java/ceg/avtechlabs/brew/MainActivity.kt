@@ -26,6 +26,7 @@ import com.avtechlabs.peacock.checkAndAskPermission
 import com.avtechlabs.peacock.isInternetConnected
 import com.avtechlabs.peacock.showLongToast
 import com.google.android.gms.ads.AdRequest
+import com.mikepenz.materialdrawer.DrawerBuilder
 import kotlinx.android.synthetic.main.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_brew.*
