@@ -1,6 +1,5 @@
 package ceg.avtechlabs.brew.commons.utilities
 
-import android.app.Activity
 import android.app.AlarmManager
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -10,7 +9,6 @@ import android.content.Intent
 import android.os.Vibrator
 import android.support.design.R
 import android.support.v4.app.NotificationCompat
-import android.util.Log
 
 /**
  * Created by adhithyan-3592 on 27/07/16.
@@ -35,7 +33,7 @@ fun startService(context: Context, time: Int) {
 }
 
 fun recurring(context: Context) {
-    val afterADay = 24 * 60 * 60 * 1000;
+    //val afterADay = 24 * 60 * 60 * 1000;
     startService(context, 6000)
 }
 

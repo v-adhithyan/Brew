@@ -39,8 +39,6 @@ dependencies {
     compile "com.squareup.retrofit2:converter-moshi:2.0.0"
     compile 'com.github.v-adhithyan:peacock:460221078d'
     compile 'com.google.android.gms:play-services-ads:8+'
-    compile 'net.hockeyapp.android:HockeySDK:4.0.1'
-    compile 'com.mikepenz:materialdrawer:5.3.6'
     compile 'com.github.dmytrodanylyk:android-morphing-button:98a4986e56'
 }
 repositories {

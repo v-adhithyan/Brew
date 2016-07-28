@@ -2,25 +2,19 @@ package ceg.avtechlabs.brew.commons.utilities
 
 import android.app.Activity
 import android.app.WallpaperManager
-import android.graphics.Point
-import android.graphics.Typeface
 import android.graphics.drawable.BitmapDrawable
-import android.support.design.widget.Snackbar
 import android.support.v4.app.FragmentManager
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.ProgressBar
-import android.widget.TextView
 import ceg.avtechlabs.brew.R
 import ceg.avtechlabs.brew.fragments.MainFragment
 import ceg.avtechlabs.brew.fragments.NoNetworkFragment
 import com.avtechlabs.peacock.isInternetConnected
 import com.avtechlabs.peacock.showLongToast
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.content_main.view.*
 
 /**
  * Created by adhithyan-3592 on 23/07/16.

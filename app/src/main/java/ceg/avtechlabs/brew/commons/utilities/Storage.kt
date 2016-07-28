@@ -1,9 +1,7 @@
 package ceg.avtechlabs.brew.commons.utilities
 
-import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
 import android.os.Environment
 import android.util.Log
 import android.widget.ImageView
@@ -27,7 +25,7 @@ fun ImageView.save(fileName: String) : Boolean{
     var stream = ByteArrayOutputStream()
 
     bitmap?.compress(Bitmap.CompressFormat.JPEG, 80, stream)
-    val bytes = stream?.toByteArray()
+    val bytes = stream.toByteArray()
 
     var path = getStorageDir()?.absolutePath ?: null
     var fullFileName: String? = null

@@ -1,18 +1,13 @@
 package ceg.avtechlabs.brew.fragments
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
-import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
-import android.util.Log
 import android.view.*
 import ceg.avtechlabs.brew.R
 import ceg.avtechlabs.brew.commons.utilities.changeFragment
 import ceg.avtechlabs.brew.commons.utilities.inflate
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.content_brew.*
 import kotlinx.android.synthetic.main.content_network_unavailable.*
 
 /**

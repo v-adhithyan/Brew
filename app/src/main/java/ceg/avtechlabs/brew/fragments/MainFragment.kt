@@ -38,9 +38,9 @@ class MainFragment: Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        showProgressBar()
         hideButtons()
         showAd()
-        showProgressBar()
         subscribe()
     }
 
@@ -60,7 +60,7 @@ class MainFragment: Fragment() {
             transformTextView()
             showButtons()
             setListeners()
-            progress?.dismiss()
+            progress.dismiss()
 
             textview_title.text = (response.get(0))
             textview_info.text = (response.get(1))
@@ -70,9 +70,9 @@ class MainFragment: Fragment() {
     }
 
     private fun showProgressBar() {
-        progress?.setMessage("Brewing ...")
-        progress?.setCancelable(false)
-        progress?.show()
+        progress.setMessage("Brewing ...")
+        progress.setCancelable(false)
+        progress.show()
     }
 
     override fun onResume() {
@@ -158,9 +158,7 @@ class MainFragment: Fragment() {
 
     private fun transformData(info: String): List<String> {
         val content = info.split("\n")
-        val title = content.get(0)
-        val info = content.get(1)
 
-        return listOf(title, info)
+        return listOf(content.get(0), content.get(1))
     }
 }
