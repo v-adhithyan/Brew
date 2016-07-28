@@ -6,4 +6,4 @@ package ceg.avtechlabs.brew.model
 
 data class Brew(val statusCode: Integer, val versionCode: Integer, val data: Data)
 
-data class Data(val _id: Integer, val url: String, val title: String, val info: String)
+data class Data(val url: String, val title: String, val info: String)

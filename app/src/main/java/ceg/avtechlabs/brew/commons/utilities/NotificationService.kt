@@ -27,11 +27,16 @@ fun showNotification(act: Context, title: String, message: String) {
 }
 
 fun startService(context: Context, time: Int) {
-    Log.d("brewdata", "service")
     val intent = Intent(context, NotificationService::class.java)
     val pendingIntent = PendingIntent.getBroadcast(context, 3592, intent, 0)
     val alarm = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
     alarm.set(AlarmManager.RTC_WAKEUP, time + System.currentTimeMillis(), pendingIntent)
+    //recurring(context)
+}
+
+fun recurring(context: Context) {
+    val afterADay = 24 * 60 * 60 * 1000;
+    startService(context, 6000)
 }
 
 fun vibrate(context: Context) {
@@ -42,7 +47,7 @@ class NotificationService(): BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
         vibrate(context)
-        showNotification(context, "service", "service started")
+        showNotification(context, "Brew ! - Surprise in store", "Tap here to know what's brewing today" + System.currentTimeMillis())
     }
 
 }
